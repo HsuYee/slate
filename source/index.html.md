@@ -2,10 +2,11 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+  # - shell
+  # - ruby
+  # - python
+  # - javascript
+  - json
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -21,221 +22,313 @@ code_clipboard: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Welcome to the Ai of Things API! 
 
 # Authentication
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+# Users
 
-```python
-import kittn
+## Get All Users
+This endpoint retrieves all users in array of JSON Object.
 
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> User object structure:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+  "userid": "",
+  "role": ""
+}
 ```
-
-This endpoint retrieves all kittens.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+`GET https://aiiot.southeastasia.cloudapp.azure.com/api/users`
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Admin, Viewer
 </aside>
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+## Update User
+This endpoint will update user.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`POST https://aiiot.southeastasia.cloudapp.azure.com/api/user`
 
-### URL Parameters
+<aside class="success">
+Admin
+</aside>
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
+## Delete User
+This endpoint will delete user.
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`DELETE https://aiiot.southeastasia.cloudapp.azure.com/api/user`
 
-### URL Parameters
+<aside class="success">
+Admin
+</aside>
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+# Permissions
 
+## Get All Permissions
+This endpoint retrieves all permissions in array of JSON Object.
+
+> Permission object strcture:
+
+```json
+{
+  "uri": "/api/devices",
+  "method": "get",
+  "roles": [
+    "viewer",
+    "admin"
+  ],
+  "ts": "2020-05-12T13:21:29.031Z"
+}
+```
+
+### HTTP Request
+
+`GET https://aiiot.southeastasia.cloudapp.azure.com/api/permissions`
+<aside class="success">
+Admin, Viewer
+</aside>
+
+# Contractors
+
+## Get All Contractors
+This endpoint retrieves all contractors in array of JSON Object.
+
+> Contractor object structure:
+
+```json
+{
+  "idnumber": "346789",
+  "name": "user 2",
+  "role": "cleaner",
+  "countrycode": "+65",
+  "mobilenumber": "91234521",
+  "company": "Cleaning Service Pte Ltd",
+  "escalatingnumber": "81231231",
+  "smsgroups": "[\"sms group A\"]",
+  "ts": "2020-05-21T07:01:22.130Z"
+}
+```
+
+### HTTP Request
+
+`GET https://aiiot.southeastasia.cloudapp.azure.com/api/permissions`
+<aside class="success">
+Admin, Viewer
+</aside>
+
+# Devices
+
+## Get All Devices
+This endpoint retrieves all devices in array of JSON Object.
+
+> Device object structure:
+
+```json
+{
+    "id": ,
+    "deviceid": "",
+    "serialno": "",
+    "jsondata": {
+      "tags": {
+        "site": "",
+        "block": "",
+        "floor": "",
+        "washroom": "",
+        "subsystem": "",
+        "alarmrules": [],
+        "groupowner": "",
+        "iotgateway": ""
+      },
+      "devicename": "",
+      "devicelocation": []
+    },
+    "ts": ""
+}
+```
+
+### HTTP Request
+
+`GET https://aiiot.southeastasia.cloudapp.azure.com/api/devices`
+
+<aside class="success">
+Admin, Viewer
+</aside>
+
+## Device Control
+### HTTP Request
+
+`POST https://aiiot.southeastasia.cloudapp.azure.com/api/devicecontrol`
+
+<aside class="success">
+Viewer
+</aside>
+
+## Update Device
+This endpoint will update device.
+
+### HTTP Request
+
+`POST https://aiiot.southeastasia.cloudapp.azure.com/api/device`
+
+<aside class="success">
+Admin
+</aside>
+
+## Delete Device
+This endpoint will delete device.
+
+### HTTP Request
+
+`DELETE https://aiiot.southeastasia.cloudapp.azure.com/api/device`
+
+<aside class="success">
+Admin
+</aside>
+
+
+# Sensordata
+## Sensordata
+This endpoint retrieves all sensordata in array of JSON Object.
+
+> Sensordata object structure:
+
+```json
+{
+  "deviceid": "00158d0004089a4d",
+  "status": true,
+  "jsondata": [
+    {
+      "name": "temperature",
+      "value": 27.49,
+      "status": true
+    },
+    {
+      "name": "humidity",
+      "value": 53.18,
+      "status": true
+    }
+  ],
+  "alarms": [],
+  "ts": "2020-06-24T17:36:06.464Z"
+}
+```
+
+### HTTP Request
+
+`POST https://aiiot.southeastasia.cloudapp.azure.com/api/sensordata`
+
+<aside class="success">
+Viewer
+</aside>
+
+## Latest Sensordata
+### HTTP Request
+
+`POST https://aiiot.southeastasia.cloudapp.azure.com/api/sensordatas/latest?num=:num&units=:units`
+
+<aside class="success">
+Viewer
+</aside>
+
+## Sensordata History
+
+### HTTP Request
+
+`GET https://aiiot.southeastasia.cloudapp.azure.com/api/sensordatas/history?num=:num&units=:units&deviceid=:deviceid`
+
+<aside class="success">
+Viewer
+</aside>
+
+
+# Categories
+
+## Get All Categories
+This endpoint retrieves all categories in array of JSON Object.
+
+> Category object structure:
+
+```json
+{
+  "id": 1,
+  "tagname": "lightlocation",
+  "jsondata": [
+    {
+      "id": "38cf7071-ce25-4c1e-a5c6-4a0a60f5252d",
+      "name": "general office"
+    },
+    {
+      "id": "54636c31-d031-4fa6-ae11-501bd55419fa",
+      "name": "principle office"
+    },
+    {
+      "id": "e95b4d49-8361-4d71-8761-3a24d65299c0",
+      "name": "server room"
+    }
+  ],
+  "multichoice": false,
+  "protected": true,
+  "useinfilter": false
+}
+```
+
+### HTTP Request
+
+`GET https://aiiot.southeastasia.cloudapp.azure.com/api/tags`
+
+<aside class="success">
+Admin, Viewer
+</aside>
+
+## Update Category
+This endpoint will update category.
+
+### HTTP Request
+
+`POST https://aiiot.southeastasia.cloudapp.azure.com/api/tag`
+
+<aside class="success">
+Admin
+</aside>
+
+## Delete Category
+This endpoint will delete category.
+
+### HTTP Request
+
+`DELETE https://aiiot.southeastasia.cloudapp.azure.com/api/tag`
+
+<aside class="success">
+Admin
+</aside>
+
+# Booter
+
+## Get Booter
+### HTTP Request
+
+`GET https://aiiot.southeastasia.cloudapp.azure.com/api/booter`
+
+<aside class="success">
+Admin
+</aside>
+
+## POST Booter
+### HTTP Request
+
+`POST https://aiiot.southeastasia.cloudapp.azure.com/api/booter`
+
+<aside class="success">
+Admin
+</aside>
